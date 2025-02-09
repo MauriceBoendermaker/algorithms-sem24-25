@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "W1.sln"
+    "dotnet.defaultSolution": "W1.sln",
+    "terminal.integrated.cwd": "${fileDirname}"
 }
