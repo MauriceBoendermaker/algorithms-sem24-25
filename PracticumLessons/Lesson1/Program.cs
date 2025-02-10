@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Configuration.Assemblies;
-using System.Numerics;
 
 namespace Lesson1
 {
@@ -37,6 +35,15 @@ namespace Lesson1
                 };
             Console.WriteLine(NDArray);
             Console.WriteLine(JaggedArray);
+
+            int[] v = {1, 2, 4, 5, 3};
+            bool isOrdered = true;
+
+            for (int i = 0; isOrdered && i < v.Length; ++i)
+            {
+                isOrdered = v[i] <= v[i + 1];
+            }
+            Console.WriteLine(isOrdered);
         }
 
         static int FindNumber(int[] arr, int key)
