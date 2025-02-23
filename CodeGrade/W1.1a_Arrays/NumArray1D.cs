@@ -8,31 +8,78 @@ public class NumArray1D<T> : Array1D<T>, INumArray1D<T> where T : IComparable<T>
 
     public T? Aggregate(Func<T, T, T> fx)
     {
-        //ToDo
-        throw new NotImplementedException();
+        if (_index == 0)
+        {
+            return default(T);
+        }
+
+        T result = _data[0];
+        for (int i = 1; i < _index - 1; i++)
+        {
+            result = fx(result, _data[i]);
+        }
+        return result;
     }
 
     public T? Max()
     {
-        //ToDo
-        throw new NotImplementedException();
+        if (_index == 0)
+        {
+            return default(T);
+        }
+
+        T maxValue = _data[0];
+        for (int i = 1; i < _index - 1; i++)
+        {
+            if (_data[i] > maxValue)
+            {
+                maxValue = _data[i];
+            }
+        }
+        return maxValue;
     }
 
     public T? Min()
     {
-        //ToDo
-        throw new NotImplementedException();
+        if (_index == 0)
+        {
+            return default(T);
+        }
+
+        T minValue = _data[0];
+        for (int i = 1; i < _index - 1; i++)
+        {
+            if (_data[i] < minValue)
+            {
+                minValue = _data[i];
+            }
+        }
+        return minValue;
     }
 
     public T? Product(bool IgnoreZeros = true)
     {
-        //ToDo
-        throw new NotImplementedException();
+        if (_index == 0)
+        {
+            return T.One;
+        }
+
+        T product = T.One;
+        for (int i = 0; i < _index; i++)
+        {
+            if (IgnoreZeros && _data[i] == T.Zero)
+            {
+                continue;
+            }
+
+            product *= _data[i];
+        }
+        return product;
     }
 
     public T? Sum()
     {
-        //ToDo
-        throw new NotImplementedException();
+        var result = Aggregate((a, b) => a + b);
+        return result;
     }
 }

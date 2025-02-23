@@ -17,15 +17,24 @@ public class Array1D<T> : IArray1D<T> where T : IEquatable<T>
         _index = data.Length;
     }
 
-    public int Length => //ToDo
-        throw new NotImplementedException();
+    public int Length => _data.Length;
 
-    public int Count => //ToDo
-        throw new NotImplementedException();
+    public int Count => _index;
 
     public int Find(T Item, int startIndex = 0)
     {
-        //ToDo
-        throw new NotImplementedException();
+        if (startIndex >= _index)
+        {
+            return -1;
+        }
+
+        for (int i = startIndex; i < _index; i++)
+        {
+            if (_data[i].Equals(Item))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }
