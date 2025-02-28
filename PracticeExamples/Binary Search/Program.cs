@@ -7,7 +7,7 @@ namespace BinarySearch
         public static void Main(string[] args)
         {
             int[] numbers = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 21 };
-            int target = 22;
+            int target = 4;
 
             Console.WriteLine(BinarySearch(numbers, target));
         }
@@ -19,13 +19,12 @@ namespace BinarySearch
 
             while (left <= right)
             {
-                int mid = (left + right) / 2;
+                int mid = left + (right - left) / 2;
 
                 if (array[mid] == target)
-                {
                     return mid;
-                }
-                else if (array[mid] < target)
+
+                if (array[mid] < target)
                 {
                     left = mid + 1;
                 }
