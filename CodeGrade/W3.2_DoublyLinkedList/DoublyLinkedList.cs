@@ -11,39 +11,104 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> where T : IComparable<T>
     //Search
     public DoubleNode<T>? Search(T value)
     {
-        throw new NotImplementedException();
+        var current = First;
+        while (current != null)
+        {
+            if (current.Value.CompareTo(value) == 0)
+            {
+                return current;
+            }
+            current = current.Next;
+        }
+        return null;
     }
 
     #region "addNode=> first, last, sorted" 
     public void AddFirst(T value)
     {
-        throw new NotImplementedException();
+        var newNode = new DoubleNode<T>(value, First, null);
+        if (First != null)
+        {
+            First.Previous = newNode;
+        }
+        else
+        {
+            Last = newNode;
+        }
+        First = newNode;
     }
 
     public void AddLast(T value)
     {
-        throw new NotImplementedException();
+        var newNode = new DoubleNode<T>(value, null, Last);
+        if (Last != null)
+        {
+            Last.Next = newNode;
+        }
+        else
+        {
+            First = newNode;
+        }
+        Last = newNode;
     }
 
     public void AddSorted(T value)
     {
-        throw new NotImplementedException();
+        if (First == null || First.Value.CompareTo(value) >= 0)
+        {
+            AddFirst(value);
+            return;
+        }
+
+        var current = First;
+        while (current.Next != null && current.Next.Value.CompareTo(value) < 0)
+        {
+            current = current.Next;
+        }
+
+        if (current.Next == null)
+        {
+            AddLast(value);
+            return;
+        }
+
+        var newNode = new DoubleNode<T>(value, current.Next, current);
+        current.Next.Previous = newNode;
+        current.Next = newNode;
     }
     #endregion
 
     public bool Remove(T value)
     {
-        throw new NotImplementedException();
+        var node = Search(value);
+        if (node == null)
+        {
+            return false;
+        }
+
+        Delete(node);
+        return true;
     }
 
     public void Delete(DoubleNode<T> node)
     {
-        // check Prev
-        // check Next
-        // check First
-        // check Last
-        throw new NotImplementedException();
+        if (node.Previous != null)
+        {
+            node.Previous.Next = node.Next;
+        }
+        else
+        {
+            First = node.Next;
+        }
 
+        if (node.Next != null)
+        {
+            node.Next.Previous = node.Previous;
+        }
+        else
+        {
+            Last = node.Previous;
+        }
     }
 
     public IEnumerator<T> GetEnumerator()
@@ -60,5 +125,4 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> where T : IComparable<T>
     {
         return GetEnumerator();
     }
-
 }
