@@ -3,17 +3,17 @@ namespace Solution;
 
 public static class DynamicProgramming {
 
-    public static long FibonacciDynamic(long n, long[] results)
+    public static long FibonacciDynamic(long n, long[] storedResults)
     {    
         Utils.ShowCallStack(false); //DO NOT comment this line of code
         
-        if (results[n] != 0 || n == 0)
+        if (storedResults[n] != 0 || n == 0)
         {
-            return results[n];
+            return storedResults[n];
         }
 
-        results[n] = FibonacciDynamic(n - 1, results) + FibonacciDynamic(n - 2, results);
+        storedResults[n] = FibonacciDynamic(n - 1, storedResults) + FibonacciDynamic(n - 2, storedResults);
 
-        return results[n];
+        return storedResults[n];
     }
 }    
